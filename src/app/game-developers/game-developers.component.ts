@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-game-developers',
   templateUrl: './game-developers.component.html',
@@ -11,5 +12,4 @@ export class GameDevelopersComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

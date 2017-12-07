@@ -2,27 +2,27 @@ import {Injectable} from '@angular/core';
 import {Http, Headers, URLSearchParams} from '@angular/http';
 import {Subject} from 'rxjs/Subject';
 import {environment} from '../../environments/environment';
-import {GameDeveloper} from '../shared/game_developer.model';
+import {GameCharacter} from '../shared/game_character.model';
 
 @Injectable()
-export class GameDeveloperService {
-  developersChanged = new Subject<GameDeveloper[]>();
+export class GameCharacterService {
+  charactersChanged = new Subject<GameCharacter[]>();
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private serverUrl = environment.serverUrl + '/developers'; // URL to web api
-  private developers: GameDeveloper[] = [];
+  private serverUrl = environment.serverUrl + '/characters'; // URL to web api
+  private characters: GameCharacter[] = [];
 
   constructor(private http: Http) {
   }
 
-  public getDevelopers(): Promise<GameDeveloper[]> {
+  public getCharacters(): Promise<GameCharacter[]> {
     console.log('items ophalen van server');
     return this.http.get(this.serverUrl, {headers: this.headers})
       .toPromise()
       .then(response => {
         console.dir(response.json());
-        this.developers = response.json() as GameDeveloper[];
-        return this.developers;
+        this.characters = response.json() as GameCharacter[];
+        return this.characters;
       })
       .catch(error => {
         console.log('handleError');
@@ -30,12 +30,12 @@ export class GameDeveloperService {
       });
   }
 
-  public getDeveloper(_id: string): Promise<GameDeveloper> {
+  public getCharacter(_id: string): Promise<GameCharacter> {
     return this.http.get(this.serverUrl + '/' + _id, {headers: this.headers})
       .toPromise()
       .then(response => {
         console.dir(response.json());
-        return response.json() as GameDeveloper;
+        return response.json() as GameCharacter;
       })
       .catch(error => {
         console.log('handleError');
