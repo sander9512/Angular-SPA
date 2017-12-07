@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div
+      class="btn-group"
+      appDropdown>
+      <button
+        type="button"
+        class="btn btn-primary dropdown-toggle">
+        Manage Game <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a style="cursor: pointer;" (click)="onCharacterView()">Character Overview</a></li>
+        <li><a style="cursor: pointer;" (click)="onEditGame()">Edit Game</a></li>
+        <li><a style="cursor: pointer;" (click)="onDeleteGame()">Delete Game</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="text-center">
+      <h4 class="list-group-item-heading">{{ game.title }}</h4>
+      <p>{{ game.description }}</p>
+    </div>
+  </div>
+</div>
+
