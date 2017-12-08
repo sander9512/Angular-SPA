@@ -4,16 +4,16 @@ export class Game {
   private __id: string;
   private _title: string;
   private _description: string;
+  private _release_date: string;
   private _gameCharacters: GameCharacter[];
-  private _releaseDate: string;
 
 
-  get releaseDate(): string {
-    return this._releaseDate;
+  get release_date(): string {
+    return this._release_date;
   }
 
-  set releaseDate(value: string) {
-    this._releaseDate = value;
+  set release_date(value: string) {
+    this._release_date = value;
   }
 
   get _id(): string {
