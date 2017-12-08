@@ -5,7 +5,16 @@ export class GameDeveloper {
   private _name: string;
   private _companyDescription: string;
   private _games: Game[];
+  private _location: string;
 
+
+  get location(): string {
+    return this._location;
+  }
+
+  set location(value: string) {
+    this._location = value;
+  }
 
   get _id(): string {
     return this.__id;

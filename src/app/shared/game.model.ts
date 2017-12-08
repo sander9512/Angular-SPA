@@ -5,7 +5,16 @@ export class Game {
   private _title: string;
   private _description: string;
   private _gameCharacters: GameCharacter[];
+  private _releaseDate: string;
 
+
+  get releaseDate(): string {
+    return this._releaseDate;
+  }
+
+  set releaseDate(value: string) {
+    this._releaseDate = value;
+  }
 
   get _id(): string {
     return this.__id;
