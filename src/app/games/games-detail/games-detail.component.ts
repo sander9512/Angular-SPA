@@ -29,4 +29,13 @@ export class GamesDetailComponent implements OnInit {
         }
       );
   }
+
+  onCharacterView() {
+  }
+
+  onEditGame() {
+  }
+
+  onDeleteGame() {
+  }
 }

@@ -28,4 +28,9 @@ export class GameCharacterDetailComponent implements OnInit {
       );
   }
 
+  onEditCharacter() {
+  }
+
+  onDeleteCharacter() {
+  }
 }

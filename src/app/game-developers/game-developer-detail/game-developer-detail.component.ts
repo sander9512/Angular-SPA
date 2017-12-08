@@ -28,4 +28,12 @@ export class GameDeveloperDetailComponent implements OnInit {
       );
   }
 
+  onAddGame() {
+  }
+
+  onEditDeveloper() {
+  }
+
+  onDeleteDeveloper() {
+  }
 }
