@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  serverUrl: 'https://nodejs-gamecentre.herokuapp.com/api/v1/'
 };
