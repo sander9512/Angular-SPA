@@ -8,14 +8,6 @@ export class GameDeveloper {
   private _location: string;
 
 
-  get location(): string {
-    return this._location;
-  }
-
-  set location(value: string) {
-    this._location = value;
-  }
-
   get _id(): string {
     return this.__id;
   }
@@ -47,6 +39,15 @@ export class GameDeveloper {
   set games(value: Game[]) {
     this._games = value;
   }
+
+  get location(): string {
+    return this._location;
+  }
+
+  set location(value: string) {
+    this._location = value;
+  }
+
   constructor(values: Object = {}) {
     Object.assign(this, values);
   }

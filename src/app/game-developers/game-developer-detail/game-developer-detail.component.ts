@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {GameDeveloper} from '../../shared/game_developer.model';
 import {GameDeveloperService} from '../game_developers.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {QueryParamsHandling} from '@angular/router/src/config';
 
 @Component({
   selector: 'app-game-developer-detail',
@@ -29,11 +30,13 @@ export class GameDeveloperDetailComponent implements OnInit {
   }
 
   onAddGame() {
+    this.router.navigate(['addGame'], {relativeTo: this.route, queryParamsHandling: 'preserve'});
   }
 
   onEditDeveloper() {
   }
 
   onDeleteDeveloper() {
+    this.devService.deleteDeveloper(this.developer);
   }
 }

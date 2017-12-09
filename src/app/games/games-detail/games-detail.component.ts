@@ -31,11 +31,13 @@ export class GamesDetailComponent implements OnInit {
   }
 
   onCharacterView() {
+    this.router.navigate(['characters'], {relativeTo: this.route, queryParamsHandling: 'preserve'});
   }
 
   onEditGame() {
   }
 
   onDeleteGame() {
+    this.gameService.deleteGame(this.game);
   }
 }

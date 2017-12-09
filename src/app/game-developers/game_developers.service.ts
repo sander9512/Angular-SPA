@@ -3,6 +3,7 @@ import {Http, Headers, URLSearchParams} from '@angular/http';
 import {Subject} from 'rxjs/Subject';
 import {environment} from '../../environments/environment';
 import {GameDeveloper} from '../shared/game_developer.model';
+import {Game} from '../shared/game.model';
 
 @Injectable()
 export class GameDeveloperService {
@@ -42,4 +43,46 @@ export class GameDeveloperService {
         return Promise.reject(error.message || error);
       });
   }
+  public deleteDeveloper(developer: GameDeveloper): Promise<string> {
+    const idx: number = this.developers.indexOf(developer);
+    this.developers.splice(idx, 1);
+    return this.http.delete(this.serverUrl + '/' + developer._id, {headers: this.headers})
+      .toPromise()
+      .then( response => {
+        console.dir(response.json());
+        return response.json() as string;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+  }
+  public addDeveloper(developer: GameDeveloper) {
+    return this.http.post(this.serverUrl, developer, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        console.log(developer);
+        console.dir(response.toString());
+        return response.toString() as string;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+  }
+
+  public addGameToDev(game: Game, id: string) {
+    console.log(game, 'game submitted');
+    return this.http.put(this.serverUrl + '/' + id + '/' + 'game', game, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        console.log(game);
+        console.dir(response.json());
+        return response.json() as GameDeveloper;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+}
 }

@@ -24,6 +24,8 @@ import { GamesListComponent } from './games/games-list/games-list.component';
 import { GameCharacterListComponent } from './game-characters/game-character-list/game-character-list.component';
 import { GameCharacterDetailComponent } from './game-characters/game-character-detail/game-character-detail.component';
 import {GameCharacterService} from './game-characters/game_character.service';
+import { GamesCharacterListComponent } from './games/games-character-list/games-character-list.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -45,9 +47,11 @@ import {GameCharacterService} from './game-characters/game_character.service';
     GamesListComponent,
     GameCharacterListComponent,
     GameCharacterDetailComponent,
+    GamesCharacterListComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpModule,
     AppRoutingModule
   ],

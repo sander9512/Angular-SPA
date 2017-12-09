@@ -42,4 +42,18 @@ export class GameCharacterService {
         return Promise.reject(error.message || error);
       });
   }
+  public deleteCharacter(character: GameCharacter): Promise<string> {
+    const idx: number = this.characters.indexOf(character);
+    this.characters.splice(idx, 1);
+    return this.http.delete(this.serverUrl + '/' + character._id, {headers: this.headers})
+      .toPromise()
+      .then( response => {
+        console.dir(response.toString());
+        return response.toString() as string;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+  }
 }

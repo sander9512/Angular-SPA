@@ -32,5 +32,6 @@ export class GameCharacterDetailComponent implements OnInit {
   }
 
   onDeleteCharacter() {
+    this.charService.deleteCharacter(this.character);
   }
 }

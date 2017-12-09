@@ -42,4 +42,18 @@ export class GamesService {
         return Promise.reject(error.message || error);
       });
   }
+  public deleteGame(game: Game): Promise<string> {
+    const idx: number = this.games.indexOf(game);
+    this.games.splice(idx, 1);
+    return this.http.delete(this.serverUrl + '/' + game._id, {headers: this.headers})
+      .toPromise()
+      .then( response => {
+        console.dir(response.json());
+        return response.json() as string;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+  }
 }
