@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-xs-21">
+    <h4>Character overview for {{ game.title }}</h4>
+    <button class="btn btn-primary" (click)="AddCharacter()">Add a new character</button>
+    <div *ngIf="game.gameCharacters?.length === 0">
+      <h4>No characters registered for this game!</h4>
+    </div>
+    <div *ngIf="game.gameCharacters?.length > 0">
+      <app-game-character-item *ngFor="let char of game.gameCharacters" [character]="char"></app-game-character-item>
+    </div>
+  </div>
+</div>
