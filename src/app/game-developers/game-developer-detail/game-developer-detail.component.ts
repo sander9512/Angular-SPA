@@ -34,6 +34,7 @@ export class GameDeveloperDetailComponent implements OnInit {
   }
 
   onEditDeveloper() {
+    this.router.navigate(['edit'], {relativeTo: this.route, queryParamsHandling: 'preserve'});
   }
 
   onDeleteDeveloper() {

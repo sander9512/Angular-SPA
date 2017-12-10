@@ -29,7 +29,7 @@ export class GameDeveloperListComponent implements OnInit, OnDestroy {
   }
 
   AddDeveloper() {
-    this.router.navigate(['/developers/form']);
+    this.router.navigate(['/developers/new']);
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

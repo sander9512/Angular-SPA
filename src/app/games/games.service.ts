@@ -3,6 +3,7 @@ import {Http, Headers, URLSearchParams} from '@angular/http';
 import {Subject} from 'rxjs/Subject';
 import {environment} from '../../environments/environment';
 import {Game} from '../shared/game.model';
+import {GameCharacter} from '../shared/game_character.model';
 
 @Injectable()
 export class GamesService {
@@ -43,7 +44,7 @@ export class GamesService {
       });
   }
   public deleteGame(game: Game): Promise<string> {
-    const idx: number = this.games.indexOf(game);
+    const idx: number = this.findIndexCust(game._id);
     this.games.splice(idx, 1);
     return this.http.delete(this.serverUrl + '/' + game._id, {headers: this.headers})
       .toPromise()
@@ -55,5 +56,41 @@ export class GamesService {
         console.log('handleError');
         return Promise.reject(error.message || error);
       });
+  }
+  public addCharacterToGame(char: GameCharacter, id: string) {
+    console.log(char, 'character submitted');
+    return this.http.put(this.serverUrl + '/' + id + '/' + 'characters', char, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        console.log(char);
+        console.dir(response.json());
+        return response.json() as Game;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+  }
+  public editGame(game: Game, id: string) {
+    console.log(game, 'game submitted');
+    return this.http.put(this.serverUrl + '/' + id, game, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        console.log(game);
+        console.dir(response.json());
+        return response.json() as Game;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+  }
+  private findIndexCust(id: string) {
+    let index = -1;
+    for (let i = 0, len = this.games.length; i < len; i++) {
+      if (this.games[i]._id === id) {
+        return index = i;
+      }
+    }
   }
 }

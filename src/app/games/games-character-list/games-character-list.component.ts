@@ -31,5 +31,6 @@ export class GamesCharacterListComponent implements OnInit {
   }
 
   AddCharacter() {
+    this.router.navigate(['newCharacter'], {relativeTo: this.route, queryParamsHandling: 'preserve'});
   }
 }

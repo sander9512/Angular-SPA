@@ -35,6 +35,7 @@ export class GamesDetailComponent implements OnInit {
   }
 
   onEditGame() {
+    this.router.navigate(['edit'], {relativeTo: this.route, queryParamsHandling: 'preserve'});
   }
 
   onDeleteGame() {

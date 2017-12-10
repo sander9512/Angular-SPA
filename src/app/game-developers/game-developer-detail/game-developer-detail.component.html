@@ -25,16 +25,20 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
+    <h4>Company description</h4>
     {{ developer.companyDescription }}
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xs-12" *ngIf="developer.games?.length > 0">
     <ul class="list-group">
       <li
         class="list-group-item">
         <app-games-item *ngFor="let game of developer.games" [game]="game"></app-games-item>
       </li>
     </ul>
+  </div>
+  <div class="col-xs-12" *ngIf="developer.games?.length === 0">
+    <h4>No games registered for {{ developer.name }}</h4>
   </div>
 </div>

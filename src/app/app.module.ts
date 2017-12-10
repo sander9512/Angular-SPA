@@ -26,6 +26,7 @@ import { GameCharacterDetailComponent } from './game-characters/game-character-d
 import {GameCharacterService} from './game-characters/game_character.service';
 import { GamesCharacterListComponent } from './games/games-character-list/games-character-list.component';
 import {FormsModule} from '@angular/forms';
+import { GameCharacterEditComponent } from './game-characters/game-character-edit/game-character-edit.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import {FormsModule} from '@angular/forms';
     GameCharacterListComponent,
     GameCharacterDetailComponent,
     GamesCharacterListComponent,
+    GameCharacterEditComponent,
   ],
   imports: [
     BrowserModule,

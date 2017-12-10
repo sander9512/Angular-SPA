@@ -43,7 +43,7 @@ export class GameCharacterService {
       });
   }
   public deleteCharacter(character: GameCharacter): Promise<string> {
-    const idx: number = this.characters.indexOf(character);
+    const idx: number = this.findIndexCust(character._id);
     this.characters.splice(idx, 1);
     return this.http.delete(this.serverUrl + '/' + character._id, {headers: this.headers})
       .toPromise()
@@ -55,5 +55,27 @@ export class GameCharacterService {
         console.log('handleError');
         return Promise.reject(error.message || error);
       });
+  }
+  public editCharacter(character: GameCharacter, id: string) {
+    console.log(character, 'char submitted');
+    return this.http.put(this.serverUrl + '/' + id, character, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        console.log(character);
+        console.dir(response.json());
+        return response.json() as GameCharacter;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+  }
+  private findIndexCust(id: string) {
+    let index = -1;
+    for (let i = 0, len = this.characters.length; i < len; i++) {
+      if (this.characters[i]._id === id) {
+        return index = i;
+      }
+    }
   }
 }

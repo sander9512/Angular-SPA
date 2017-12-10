@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmitCharacter(f)" #f="ngForm">
+        <div id="character-data">
+          <div class="form-group">
+            <label for="name">Character name</label>
+            <input type="text"
+                   id="name"
+                   class="form-control"
+                   ngModel name="name"
+                   required
+                   #name="ngModel">
+          </div>
+          <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</span>
+        </div>
+        <div class="form-group">
+          <label for="bio">Character bio</label>
+          <textarea type="text" id="bio" class="form-control" ngModel name="bio" required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
