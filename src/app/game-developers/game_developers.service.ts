@@ -8,6 +8,7 @@ import {Game} from '../shared/game.model';
 @Injectable()
 export class GameDeveloperService {
   developersChanged = new Subject<GameDeveloper[]>();
+  neoDeveloper = new Subject<GameDeveloper>();
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private serverUrl = environment.serverUrl + '/developers'; // URL to web api
@@ -43,6 +44,18 @@ export class GameDeveloperService {
         return Promise.reject(error.message || error);
       });
   }
+  public getDeveloperByGame(_id: string): Promise<GameDeveloper> {
+    return this.http.get(this.serverUrl + '/games/' + _id, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        console.dir(response.json());
+        return response.json() as GameDeveloper;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+  }
 
   public deleteDeveloper(developer: GameDeveloper): Promise<string> {
     console.log(developer.name);
@@ -51,6 +64,20 @@ export class GameDeveloperService {
     console.log(this.developers[idx].name);
     this.developers.splice(idx, 1);
     return this.http.delete(this.serverUrl + '/' + developer._id, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        console.dir(response.json());
+        return response.json() as string;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+  }
+
+  public deleteDeveloperNeo(developer: GameDeveloper): Promise<string> {
+    console.log(developer.name);
+    return this.http.delete(this.serverUrl + '/' + developer.name + '/neo', {headers: this.headers})
       .toPromise()
       .then(response => {
         console.dir(response.json());
@@ -75,10 +102,37 @@ export class GameDeveloperService {
         return Promise.reject(error.message || error);
       });
   }
+  public addDeveloperNeo(developer: GameDeveloper) {
+    return this.http.post(this.serverUrl + '/neo', developer, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        console.log(developer);
+        console.dir(response.toString());
+        return response.toString() as string;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+  }
 
   public addGameToDev(game: Game, id: string) {
     console.log(game, 'game submitted');
     return this.http.put(this.serverUrl + '/' + id + '/' + 'game', game, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        console.log(game);
+        console.dir(response.json());
+        return response.json() as GameDeveloper;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+  }
+  public addGameToDevNeo(game: Game, name: string) {
+    console.log(game, 'game submitted');
+    return this.http.put(this.serverUrl + '/' + name + '/' + 'game/neo', game, {headers: this.headers})
       .toPromise()
       .then(response => {
         console.log(game);

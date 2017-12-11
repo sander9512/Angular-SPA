@@ -39,5 +39,6 @@ export class GameDeveloperDetailComponent implements OnInit {
 
   onDeleteDeveloper() {
     this.devService.deleteDeveloper(this.developer);
+    this.devService.deleteDeveloperNeo(this.developer);
   }
 }

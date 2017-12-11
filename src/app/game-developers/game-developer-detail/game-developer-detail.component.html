@@ -34,7 +34,7 @@
     <ul class="list-group">
       <li
         class="list-group-item">
-        <app-games-item *ngFor="let game of developer.games" [game]="game"></app-games-item>
+        <app-games-item *ngFor="let game of developer.games" [game]="game" [developer]="developer"></app-games-item>
       </li>
     </ul>
   </div>

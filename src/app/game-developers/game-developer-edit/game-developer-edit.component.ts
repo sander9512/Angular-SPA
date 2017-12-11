@@ -52,6 +52,7 @@ export class GameDeveloperEditComponent implements OnInit {
       console.log('edited developer sent');
     } else if (!this.editMode) {
       this.devService.addDeveloper(newDev);
+      this.devService.addDeveloperNeo(newDev);
       console.log('new developer sent');
     }
     form.reset();

@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Game} from '../../shared/game.model';
 import {ActivatedRoute, Router} from '@angular/router';
+import {GameDeveloper} from '../../shared/game_developer.model';
+import {GameDeveloperService} from '../../game-developers/game_developers.service';
 
 @Component({
   selector: 'app-games-item',
@@ -9,9 +11,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class GamesItemComponent implements OnInit {
   @Input() game: Game;
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  @Input() developer: GameDeveloper;
+  constructor(private route: ActivatedRoute, private router: Router, private devService: GameDeveloperService) { }
 
   ngOnInit() {
+    this.devService.neoDeveloper.next(this.developer);
+    console.log('sending', this.developer);
   }
   onDetail() {
     console.log(this.game);
