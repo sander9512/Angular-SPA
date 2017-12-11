@@ -26,7 +26,7 @@ export class GameDeveloperEditComponent implements OnInit {
         .subscribe(params => {
             console.log('params[\'devId\']: ' + params['devId']);
             this.id = params['devId'];
-            this.devService.getDeveloper(this.id)
+            this.devService.getEntity(this.id)
               .then(developer => {
                 console.log('developer._id: ' + developer._id);
                 this.editedDeveloper = developer;
@@ -48,7 +48,8 @@ export class GameDeveloperEditComponent implements OnInit {
     const newDev = new GameDeveloper({'_name': value.name, '_companyDescription': value.description, '_location': value.location});
     console.log(newDev);
     if (this.editMode) {
-      this.devService.editDeveloper(newDev, this.id);
+      this.devService.editEntity(newDev, this.id);
+      this.devService.editDeveloperNeo(newDev, this.editedDeveloper.name);
       console.log('edited developer sent');
     } else if (!this.editMode) {
       this.devService.addDeveloper(newDev);

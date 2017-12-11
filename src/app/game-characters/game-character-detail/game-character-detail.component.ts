@@ -18,7 +18,7 @@ export class GameCharacterDetailComponent implements OnInit {
       .subscribe(params => {
           console.log('params[\'_id\']: ' + params['_id']);
           this.id = params['_id'];
-          this.charService.getCharacter(this.id)
+          this.charService.getEntity(this.id)
             .then(character => {
               console.log('character._id: ' + character._id);
               this.character = character;
@@ -33,6 +33,7 @@ export class GameCharacterDetailComponent implements OnInit {
   }
 
   onDeleteCharacter() {
-    this.charService.deleteCharacter(this.character);
+    this.charService.deleteEntity(this.character);
+    this.charService.deleteCharacterNeo(this.character);
   }
 }

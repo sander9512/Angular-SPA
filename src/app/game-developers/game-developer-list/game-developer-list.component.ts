@@ -21,7 +21,7 @@ export class GameDeveloperListComponent implements OnInit, OnDestroy {
           this.developers = developers;
         }
       );
-    this.devService.getDevelopers()
+    this.devService.getAll()
       .then(developers => {
         this.developers = developers;
       })

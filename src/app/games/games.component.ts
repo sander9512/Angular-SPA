@@ -10,21 +10,9 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class GamesComponent implements OnInit {
 
-  constructor(private gameService: GamesService) { }
+  constructor() { }
   games: Game[];
-  subscription: Subscription;
   ngOnInit() {
-    this.subscription = this.gameService.gamesChanged
-      .subscribe(
-        (games: Game[]) => {
-          this.games = games;
-        }
-      );
-    this.gameService.getGames()
-      .then(games => {
-        this.games = games;
-      })
-      .catch(error => console.log(error));
   }
 
 }

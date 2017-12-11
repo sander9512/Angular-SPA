@@ -20,7 +20,7 @@ export class GamesCharacterListComponent implements OnInit {
           console.log('params: ', params);
           console.log('params[\'_gameId\']: ' + params['_gameId']);
           this.id = params['_gameId'];
-          this.gameService.getGame(this.id)
+          this.gameService.getEntity(this.id)
             .then(game => {
               console.log('game._id: ' + game._id);
               this.game = game;

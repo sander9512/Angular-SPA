@@ -19,7 +19,7 @@ export class GamesListComponent implements OnInit, OnDestroy {
           this.games = games;
         }
       );
-    this.gameService.getGames()
+    this.gameService.getAll()
       .then(games => {
         this.games = games;
       })

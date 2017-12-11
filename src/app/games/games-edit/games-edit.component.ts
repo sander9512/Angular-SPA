@@ -32,7 +32,7 @@ export class GamesEditComponent implements OnInit {
         .subscribe(params => {
             console.log('params[\'id\']: ' + params['gameId']);
             this.id = params['gameId'];
-            this.gameService.getGame(this.id)
+            this.gameService.getEntity(this.id)
               .then(game => {
                 console.log('game.id: ' + game._id);
                 this.editedGame = game;
@@ -52,7 +52,7 @@ export class GamesEditComponent implements OnInit {
       this.route.params
         .subscribe(params => {
           this.devId = params['id'];
-          this.devService.getDeveloper(devId)
+          this.devService.getEntity(devId)
             .then(developer => {
               this.developer = developer;
               console.log('current dev', developer);
@@ -68,7 +68,8 @@ export class GamesEditComponent implements OnInit {
     const newGame = new Game({'_title': value.title, '_release_date': value.releaseDate, '_description': value.description});
     console.log(newGame);
     if (this.editMode) {
-      this.gameService.editGame(newGame, this.id);
+      this.gameService.editEntity(newGame, this.id);
+      this.gameService.editGameNeo(newGame, this.editedGame.title);
     } else if (!this.editMode) {
       this.devService.addGameToDev(newGame, id);
       this.devService.addGameToDevNeo(newGame, this.developer.name);

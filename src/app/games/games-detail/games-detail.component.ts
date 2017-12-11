@@ -20,7 +20,7 @@ export class GamesDetailComponent implements OnInit {
         console.log('params: ', params);
           console.log('params[\'gameId\']: ' + params['gameId']);
           this.id = params['gameId'];
-          this.gameService.getGame(this.id)
+          this.gameService.getEntity(this.id)
             .then(game => {
               console.log('game._id: ' + game._id);
               this.game = game;
@@ -39,6 +39,7 @@ export class GamesDetailComponent implements OnInit {
   }
 
   onDeleteGame() {
-    this.gameService.deleteGame(this.game);
+    this.gameService.deleteEntity(this.game);
+    this.gameService.deleteGameNeo(this.game);
   }
 }

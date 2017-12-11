@@ -6,9 +6,8 @@ import {GameDeveloper} from '../shared/game_developer.model';
 import {Game} from '../shared/game.model';
 
 @Injectable()
-export class GameDeveloperService {
+export class GameDeveloperService implements ServicesInterface {
   developersChanged = new Subject<GameDeveloper[]>();
-  neoDeveloper = new Subject<GameDeveloper>();
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private serverUrl = environment.serverUrl + '/developers'; // URL to web api
@@ -16,8 +15,7 @@ export class GameDeveloperService {
 
   constructor(private http: Http) {
   }
-
-  public getDevelopers(): Promise<GameDeveloper[]> {
+  getAll(): Promise<GameDeveloper[]> {
     console.log('items ophalen van server');
     return this.http.get(this.serverUrl, {headers: this.headers})
       .toPromise()
@@ -32,20 +30,8 @@ export class GameDeveloperService {
       });
   }
 
-  public getDeveloper(_id: string): Promise<GameDeveloper> {
-    return this.http.get(this.serverUrl + '/' + _id, {headers: this.headers})
-      .toPromise()
-      .then(response => {
-        console.dir(response.json());
-        return response.json() as GameDeveloper;
-      })
-      .catch(error => {
-        console.log('handleError');
-        return Promise.reject(error.message || error);
-      });
-  }
-  public getDeveloperByGame(_id: string): Promise<GameDeveloper> {
-    return this.http.get(this.serverUrl + '/games/' + _id, {headers: this.headers})
+  getEntity(id: string): Promise<GameDeveloper> {
+    return this.http.get(this.serverUrl + '/' + id, {headers: this.headers})
       .toPromise()
       .then(response => {
         console.dir(response.json());
@@ -57,7 +43,7 @@ export class GameDeveloperService {
       });
   }
 
-  public deleteDeveloper(developer: GameDeveloper): Promise<string> {
+  deleteEntity(developer: GameDeveloper): Promise<string> {
     console.log(developer.name);
     const idx = this.findIndexCust(developer._id);
     console.log('index', idx);
@@ -75,6 +61,20 @@ export class GameDeveloperService {
       });
   }
 
+  editEntity(developer: GameDeveloper, id: string): Promise<GameDeveloper> {
+    console.log(developer, 'dev submitted');
+    return this.http.put(this.serverUrl + '/' + id, developer, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        console.log(developer);
+        console.dir(response.json());
+        return response.json() as GameDeveloper;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+  }
   public deleteDeveloperNeo(developer: GameDeveloper): Promise<string> {
     console.log(developer.name);
     return this.http.delete(this.serverUrl + '/' + developer.name + '/neo', {headers: this.headers})
@@ -144,14 +144,14 @@ export class GameDeveloperService {
         return Promise.reject(error.message || error);
       });
   }
-  public editDeveloper(developer: GameDeveloper, id: string) {
-    console.log(developer, 'dev submitted');
-    return this.http.put(this.serverUrl + '/' + id, developer, {headers: this.headers})
+  public editDeveloperNeo(developer: GameDeveloper, name: string) {
+    console.log(developer, 'developer submitted');
+    return this.http.put(this.serverUrl + '/' + name + '/neo', developer, {headers: this.headers})
       .toPromise()
       .then(response => {
         console.log(developer);
         console.dir(response.json());
-        return response.json() as GameDeveloper;
+        return response.json() as Game;
       })
       .catch(error => {
         console.log('handleError');
@@ -159,7 +159,7 @@ export class GameDeveloperService {
       });
   }
 
-  private findIndexCust(id: string) {
+  findIndexCust(id: string) {
     let index = -1;
     for (let i = 0, len = this.developers.length; i < len; i++) {
       if (this.developers[i]._id === id) {

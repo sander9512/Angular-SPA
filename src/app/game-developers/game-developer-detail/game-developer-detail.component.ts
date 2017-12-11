@@ -19,7 +19,7 @@ export class GameDeveloperDetailComponent implements OnInit {
       .subscribe(params => {
           console.log('params[\'_id\']: ' + params['_id']);
           this.id = params['_id'];
-          this.devService.getDeveloper(this.id)
+          this.devService.getEntity(this.id)
             .then(developer => {
               console.log('developer._id: ' + developer._id);
               this.developer = developer;
@@ -38,7 +38,7 @@ export class GameDeveloperDetailComponent implements OnInit {
   }
 
   onDeleteDeveloper() {
-    this.devService.deleteDeveloper(this.developer);
+    this.devService.deleteEntity(this.developer);
     this.devService.deleteDeveloperNeo(this.developer);
   }
 }

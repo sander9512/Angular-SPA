@@ -15,7 +15,7 @@
           <span class="help-block" *ngIf="!title.valid && title.touched">Please enter a title!</span>
           <div class="form-group">
             <label for="releaseDate">Release date</label>
-            <input type="text" id="releaseDate" class="form-control" ngModel name="releaseDate" required #release="ngModel">
+            <input type="date" id="releaseDate" class="form-control" ngModel name="releaseDate" required #release="ngModel">
           </div>
           <span class="help-block" *ngIf="!release.valid && release.touched">Please enter a release date!</span>
         </div>

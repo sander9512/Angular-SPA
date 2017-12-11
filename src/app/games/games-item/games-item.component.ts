@@ -15,8 +15,6 @@ export class GamesItemComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private devService: GameDeveloperService) { }
 
   ngOnInit() {
-    this.devService.neoDeveloper.next(this.developer);
-    console.log('sending', this.developer);
   }
   onDetail() {
     console.log(this.game);

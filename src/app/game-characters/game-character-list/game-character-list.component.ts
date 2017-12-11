@@ -19,7 +19,7 @@ export class GameCharacterListComponent implements OnInit, OnDestroy {
           this.characters = characters;
         }
       );
-    this.charService.getCharacters()
+    this.charService.getAll()
       .then(characters => {
         this.characters = characters;
       })
