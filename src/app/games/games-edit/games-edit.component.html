@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea type="text" id="description" class="form-control" ngModel name="description" required #description></textarea>
+          <textarea type="text" id="description" class="form-control" rows="5" ngModel name="description" required #description></textarea>
         </div>
         <span class="help-block" *ngIf="!description.valid && description.touched">Please enter a description!</span>
         <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
