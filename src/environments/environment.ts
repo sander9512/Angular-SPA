@@ -7,5 +7,5 @@ export const environment = {
   production: false,
   // switch serverurl for localhost
   // serverUrl: 'http://localhost:3000/api/v1'
-  serverUrl: 'https://nodejs-gamecentre.herokuapp.com/api/v1/'
+  serverUrl: 'https://nodejs-gamecentre.herokuapp.com/api/v1'
 };
