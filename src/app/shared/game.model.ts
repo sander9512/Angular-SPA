@@ -6,10 +6,18 @@ export class Game {
   private _description: string;
   private _release_date: string;
   private _gameCharacters: GameCharacter[];
+  private _genres: string[];
 
 
   get release_date(): string {
     return this._release_date;
+  }
+  get genres(): string[] {
+    return this._genres;
+  }
+
+  set genres(value: string[]) {
+    this._genres = value;
   }
 
   set release_date(value: string) {

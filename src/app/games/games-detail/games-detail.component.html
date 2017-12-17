@@ -21,6 +21,18 @@
     <div class="text-center">
       <h4 class="list-group-item-heading">{{ game.title }}</h4>
       <p>{{ game.description }}</p>
+      <br>
+      <h4>Genres</h4>
+      <p *ngFor="let g of game.genres">{{g}}</p>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="similarGames?.length !== 0">
+  <div class="col-xs-12">
+    <h4>If you like this game you might also enjoy some of these games:</h4>
+    <div class="border-custom" *ngFor="let g of similarGames">
+      <h4 class="text-center">{{g.title}}</h4>
+      <p class="text-center">{{g.release_date}}</p>
     </div>
   </div>
 </div>

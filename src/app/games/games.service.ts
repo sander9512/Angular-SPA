@@ -83,6 +83,20 @@ export class GamesService implements ServicesInterface {
           return Promise.reject(error.message || error);
         });
   }
+  getSimilarGames(game: Game): Promise<Game[]> {
+    console.log('items ophalen van server');
+    return this.http.put(this.serverUrl + '/' + game._id + '/similar', game, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        console.dir(response.json());
+        this.games = response.json() as Game[];
+        return this.games;
+      })
+      .catch(error => {
+        console.log('handleError');
+        return Promise.reject(error.message || error);
+      });
+  }
 
   getEntity(id: string): Promise<Game> {
     return this.http.get(this.serverUrl + '/' + id, {headers: this.headers})

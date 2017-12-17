@@ -1,30 +1,43 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form (ngSubmit)="onGameSubmit(f)" #f="ngForm">
+      <form [formGroup]="gForm" (ngSubmit)="onGameSubmit()">
         <div id="game-data">
           <div class="form-group">
             <label for="title">Game title</label>
             <input type="text"
                    id="title"
-                   class="form-control"
-                   ngModel name="title"
-                   required
-                   #title="ngModel">
+                   formControlName="title"
+                   class="form-control">
           </div>
-          <span class="help-block" *ngIf="!title.valid && title.touched">Please enter a title!</span>
+          <span *ngIf="gForm.get('title').invalid && gForm.get('title').touched" class="help-block">Please enter a title!</span>
           <div class="form-group">
             <label for="releaseDate">Release date</label>
-            <input type="date" id="releaseDate" class="form-control" ngModel name="releaseDate" required #release="ngModel">
+            <input type="date" id="releaseDate" formControlName="release_date" class="form-control">
           </div>
-          <span class="help-block" *ngIf="!release.valid && release.touched">Please enter a release date!</span>
+          <span *ngIf="gForm.get('release_date').invalid && gForm.get('title').touched" class="help-block">Please enter a release date!</span>
         </div>
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea type="text" id="description" class="form-control" rows="5" ngModel name="description" required #description></textarea>
+          <textarea type="text" id="description" formControlName="description" class="form-control" rows="5"></textarea>
         </div>
-        <span class="help-block" *ngIf="!description.valid && description.touched">Please enter a description!</span>
-        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
+        <span *ngIf="gForm.get('description').invalid && gForm.get('description').touched" class="help-block">Please enter a description!</span>
+        <div formArrayName="genres" *ngIf="!editMode">
+          <h4>Genres</h4>
+          <button class="btn btn-default" type="button" (click)="onAddGenre()">Add Genre</button>
+          <div class="form-group" *ngFor="let genreControl of gForm.get('genres').controls; let i = index">
+            <select *ngIf="i < 3" class="form-control" [formControlName]="i">
+              <option>Action</option>
+              <option>Action Role Playing</option>
+              <option>Adventure</option>
+              <option>First Person Shooter</option>
+              <option>Third Person Shooter</option>
+              <option>RPG</option>
+            </select>
+            <!--<input type="text" class="form-control" [formControlName]="i">-->
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="gForm.invalid">Submit</button>
       </form>
     </div>
   </div>

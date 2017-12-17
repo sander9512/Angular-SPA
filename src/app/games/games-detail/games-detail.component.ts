@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./games-detail.component.css']
 })
 export class GamesDetailComponent implements OnInit {
-
+  similarGames: Game[];
   game: Game = new Game();
   id = '';
   constructor(private gameService: GamesService, private route: ActivatedRoute, private router: Router ) { }
@@ -20,10 +20,14 @@ export class GamesDetailComponent implements OnInit {
         console.log('params: ', params);
           console.log('params[\'gameId\']: ' + params['gameId']);
           this.id = params['gameId'];
-          this.gameService.getEntity(this.id)
+        this.gameService.getEntity(this.id)
             .then(game => {
               console.log('game._id: ' + game._id);
               this.game = game;
+              this.gameService.getSimilarGames(game)
+                .then(games => {
+                  this.similarGames = games;
+                });
             })
             .catch(error => console.log(error));
         }
@@ -42,4 +46,5 @@ export class GamesDetailComponent implements OnInit {
     this.gameService.deleteEntity(this.game);
     this.gameService.deleteGameNeo(this.game);
   }
+
 }
